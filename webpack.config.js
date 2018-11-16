@@ -13,8 +13,9 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: ''
   },
+  mode: "production",
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
