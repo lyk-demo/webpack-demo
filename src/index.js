@@ -1,16 +1,15 @@
-import { cube } from './math.js'
 
-function component() {
+async function getComponent() {
+
   var element = document.createElement('pre');
+  const _ = await import( /* webpackChunkName: 'loadsh' */ 'lodash')
 
-  element.innerHTML = [
-    'Hello webpack',
-    'S cubed is equsal to ' + cube(5)
-  ].join('\n\n')
-
+  element.innerHTML = _.join(['Hello', 'webpack'], '')
+  
   return element;
 }
 
-let element = component()
+getComponent().then(component => {
+  document.body.appendChild(component);
+})
 
-document.body.appendChild(element);
