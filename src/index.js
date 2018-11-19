@@ -1,15 +1,22 @@
+import _ from 'lodash'
 
-async function getComponent() {
+function component(params) {
+  var element = document.createElement('div')
+  var button = document.createElement('button')
+  var br = document.createElement('br')
 
-  var element = document.createElement('pre');
-  const _ = await import( /* webpackChunkName: 'loadsh' */ 'lodash')
+  button.innerHTML = 'Click me and look the console'
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.appendChild(br)
+  element.appendChild(button)
 
-  element.innerHTML = _.join(['Hello', 'webpack'], '')
-  
-  return element;
+  button.onclick = e => import(/* webpackChunkName: "print" */ './print.js').then(module => {
+    var print = module.default
+
+    print()
+  })
+
+  return element
 }
 
-getComponent().then(component => {
-  document.body.appendChild(component);
-})
-
+document.body.appendChild(component())
