@@ -11,9 +11,8 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: ''
+    filename: '[name].[chunkhash].js',
+    path: path.resolve(__dirname, 'dist')
   },
   mode: "production",
   devtool: 'inline-source-map',
@@ -32,7 +31,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      title: 'Caching'
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
