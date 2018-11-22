@@ -8,7 +8,8 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    polyfills: './src/polyfills.js',
+    index: './src/index.js'
   },
   output: {
     filename: '[name].[chunkhash].js',

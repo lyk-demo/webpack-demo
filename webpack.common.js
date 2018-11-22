@@ -11,6 +11,9 @@ module.exports = {
     index: './src/index.js'
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      join: ['lodash', 'join']
+    }),
     new CleanWebpackPlugin(['dist']),
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({title: 'Production'})
@@ -19,6 +22,18 @@ module.exports = {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      // {
+      //   test: require.resolve('./src/index.js'),
+      //   use: 'imports-loader?this=>window'
+      // },
+      {
+        test: require.resolve('./src/globals.js'),
+        use: 'exports-loader?file,parse=helpers.parse'
+      }
+    ]
   },
   optimization: {
     runtimeChunk: 'single',
