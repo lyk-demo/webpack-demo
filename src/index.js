@@ -1,6 +1,17 @@
 import { file, parse } from './globals.js'
 import { Response } from 'whatwg-fetch';
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+    })
+  })
+}
+
 function component(params) {
   var element = document.createElement('div')
 
