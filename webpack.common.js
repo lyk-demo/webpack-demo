@@ -18,6 +18,7 @@ module.exports = {
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({title: 'Production'})
   ],
+  devtool: 'inline-source-map',
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
@@ -32,8 +33,16 @@ module.exports = {
       {
         test: require.resolve('./src/globals.js'),
         use: 'exports-loader?file,parse=helpers.parse'
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
   },
   optimization: {
     runtimeChunk: 'single',
